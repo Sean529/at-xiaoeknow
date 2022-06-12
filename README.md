@@ -12,19 +12,6 @@ pc 端支持快捷键操作小鹅通视频。本脚本基于 [tampermonkey](http
 - 降速 **x**
 - 还原速度 **z**
 
-#### 安装
-
-在油猴中添加脚本：将 index.js 文件中的代码 copy 进去保存即可，操作如下。添加完成就可以立即使用了。
-
-- 第一步
-  <img src="./static/添加新脚本.png" width="400" />
-- 第二步
-  <img src="./static/新脚本默认页面.png" width="700" />
-- 第三步
-  <img src="./static/粘贴脚本内容.png" width="700" />
-- 第四步
-  <img src="./static/添加成功.png" width="700" />
-
 #### 进入全屏/退出全屏
 
 使用快捷键 Escape
@@ -40,3 +27,16 @@ pc 端支持快捷键操作小鹅通视频。本脚本基于 [tampermonkey](http
 #### 还原速度
 
 使用快捷键 z, 可以还原速度为 1.0
+
+### 安装
+
+在油猴中添加脚本：将 index.js 文件中的代码 copy 进去保存即可，操作如下。添加完成就可以立即使用了。
+
+- 第一步
+  <img style="display: inline-block" src="./static/添加新脚本.png" width="400" />
+- 第二步
+  <img style="display: inline-block" src="./static/新脚本默认页面.png" width="700" />
+- 第三步
+  <img style="display: inline-block" src="./static/粘贴脚本内容.png" width="700" />
+- 第四步
+  <img style="display: inline-block" src="./static/添加成功.png" width="700" />
