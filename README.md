@@ -7,14 +7,14 @@ pc 端支持快捷键操作小鹅通视频。本脚本基于 [tampermonkey](http
 - 播放/暂停 **Space**
 - 前进 **ArrowRight**
 - 后退 **ArrowLeft**
-- 全屏 **Escape**
+- 全屏 **Escape** / **Enter**
 - 提速 **c**
 - 降速 **x**
 - 还原速度 **z**
 
 #### 进入全屏/退出全屏
 
-使用快捷键 Escape
+使用快捷键 Escape 或者 Enter
 
 #### 提速
 
@@ -30,7 +30,7 @@ pc 端支持快捷键操作小鹅通视频。本脚本基于 [tampermonkey](http
 
 ### 安装
 
-在油猴中添加脚本：将 index.js 文件中的代码 copy 进去保存即可，操作如下。添加完成就可以立即使用了。
+在油猴中添加脚本：将 index.js 文件中的代码 copy 进去保存即可，操作如下。添加完成后返回小鹅通就可以立即使用快捷键了。
 
 - 第一步
   <img style="display: block" src="./static/添加新脚本.png" width="400" />
