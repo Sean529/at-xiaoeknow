@@ -30,7 +30,7 @@ pc 端支持快捷键操作小鹅通视频。本脚本基于 [tampermonkey](http
 
 ### 安装
 
-在油猴中添加脚本：将 index.js 文件中的代码 copy 进去保存即可，操作如下。添加完成后返回小鹅通就可以立即使用快捷键了。
+在油猴中添加脚本：将 [index.js](./index.js) 文件中的代码 copy 进去保存即可，操作如下。添加完成后返回小鹅通就可以立即使用快捷键了。
 
 - 第一步
   <img style="display: block" src="./static/添加新脚本.png" width="400" />
