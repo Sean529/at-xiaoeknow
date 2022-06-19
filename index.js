@@ -58,6 +58,7 @@ function injectStylesheet(url) {
     if (!e) return
 
     const { keyCode } = e
+    console.log('%c AT 🥝 keyCode 🥝-61', 'font-size:13px; background:#de4307; color:#f6d04d;', keyCode)
     //键盘快捷键
     if (keyCode === 38) {
       // 按向上键 + 音量
@@ -76,7 +77,7 @@ function injectStylesheet(url) {
     } else if (keyCode === 32) {
       // 按空格键 开始/暂停
       videoElement.paused ? videoElement.play() : videoElement.pause()
-    } else if (keyCode === 27) {
+    } else if (keyCode === 27 || keyCode === 13) {
       // 按 esc 进入全屏/退出全屏
       const [slider_right] = document.getElementsByClassName('fullBtn')
       // 刚开始还没有 fullBtn 按钮，让视频播放起来才会出现
