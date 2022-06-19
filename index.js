@@ -1,27 +1,34 @@
 // ==UserScript==
-// @name         小鹅通视频播放控制
+// @name         小鹅通视频播放快捷键
 // @author       AT
 // @namespace    http://tampermonkey.net/
 // @version      1.0
-// @description  小鹅通视频播放控制
-// @author       You
+// @description  支持使用快捷键控制视频：1.播放/暂停 Space；2.前进 ArrowRight；3.后退 ArrowLeft；4.全屏 Escape / Enter；5.提速 c；6.降速 x；7.还原速度 z
 // @match        https://appuwwsm6cl6690.h5.xiaoeknow.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=xiaoeknow.com
-// @require https://code.jquery.com/jquery-2.1.4.min.js
-// @require https://raw.githubusercontent.com/kamranahmedse/jquery-toast-plugin/bd761d335919369ed5a27d1899e306df81de44b8/dist/jquery.toast.min.js
+// @require      https://code.jquery.com/jquery-2.1.4.min.js
+// @require      https://cdn.bootcdn.net/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js
+// @updateURL    https://raw.githubusercontent.com/Sean529/at-xiaoeknow/main/index.js
 // @grant        none
+// @license      MIT
 // ==/UserScript==
-function injectStylesheet(url) {
+
+// 插入 link 函数
+const injectStylesheet = url => {
   $('head').append(
     '<link rel="stylesheet" href="' + url + '" type="text/css" />',
   )
 }
+
 ;(function () {
   'use strict'
+
+  // 插入 toast.css
   injectStylesheet(
     'https://cdn.rawgit.com/kamranahmedse/jquery-toast-plugin/bd761d335919369ed5a27d1899e306df81de44b8/dist/jquery.toast.min.css',
   )
 
+  // toast 函数
   const toast = (msg) => {
     $.toast({
       text: msg,
@@ -37,11 +44,11 @@ function injectStylesheet(url) {
     })
   }
 
+  // 监听热键
   document.onkeyup = function (event) {
     const VOL = 0.1 //1代表100%音量，每次增减0.1
     const TIME = 10 //单位秒，每次增减10秒
     const RATE = 0.1 // 速率
-
     const video = document.getElementsByTagName('video')
     if (!video?.length) return
     const [videoElement] = video
@@ -49,16 +56,18 @@ function injectStylesheet(url) {
 
     //键盘事件
     const e = event || window.event || arguments.callee.caller.arguments[0]
-    console.log(
-      '%c AT 🥝 onkeyup 🥝-25',
-      'font-size:13px; background:#de4307; color:#f6d04d;',
-      e.code,
-    )
 
     if (!e) return
 
     const { keyCode } = e
-    console.log('%c AT 🥝 keyCode 🥝-61', 'font-size:13px; background:#de4307; color:#f6d04d;', keyCode)
+
+    console.log(
+      '%c AT 🥝 onkeyup 🥝-25',
+      'font-size:13px; background:#de4307; color:#f6d04d;',
+      e.code,
+      keyCode,
+    )
+
     //键盘快捷键
     if (keyCode === 38) {
       // 按向上键 + 音量
@@ -88,15 +97,15 @@ function injectStylesheet(url) {
     } else if (keyCode === 67) {
       // c 提升速度
       videoElement.playbackRate += RATE
-	  toast(`播放速度 ${videoElement.playbackRate.toFixed(1)}`)
+      toast(`播放速度 ${videoElement.playbackRate.toFixed(1)}`)
     } else if (keyCode === 90) {
       // z 还原速度
       videoElement.playbackRate = 1
-	  toast(`播放速度 1.0`)
+      toast(`播放速度 1.0`)
     } else if (keyCode === 88) {
       // x 降低速度
       videoElement.playbackRate -= RATE
-	  toast(`播放速度 ${videoElement.playbackRate.toFixed(1)}`)
+      toast(`播放速度 ${videoElement.playbackRate.toFixed(1)}`)
     }
 
     // 首次全屏
