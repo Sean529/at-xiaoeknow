@@ -2,6 +2,9 @@
 
 pc 端支持快捷键操作小鹅通视频。本脚本基于 [tampermonkey](https://www.tampermonkey.net/)。建议使用 chrome 浏览器安装 tampermonkey 扩展。
 
+### 安装
+点击安装：[小鹅通h5视频播放快捷键](https://greasyfork.org/zh-CN/scripts/446706-%E5%B0%8F%E9%B9%85%E9%80%9Ah5%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%BF%AB%E6%8D%B7%E9%94%AE)
+
 ### 功能
 
 - 播放/暂停 **Space**
