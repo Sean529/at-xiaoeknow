@@ -1,20 +1,19 @@
 // ==UserScript==
-// @name         小鹅通视频播放快捷键
+// @name         小鹅通h5视频播放快捷键
 // @author       AT
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @description  支持使用快捷键控制视频：1.播放/暂停 Space；2.前进 ArrowRight；3.后退 ArrowLeft；4.全屏 Escape / Enter；5.提速 c；6.降速 x；7.还原速度 z
-// @match        https://appuwwsm6cl6690.h5.xiaoeknow.com/*
+// @match        https://*.h5.xiaoeknow.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=xiaoeknow.com
 // @require      https://code.jquery.com/jquery-2.1.4.min.js
 // @require      https://cdn.bootcdn.net/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js
-// @updateURL    https://raw.githubusercontent.com/Sean529/at-xiaoeknow/main/index.js
 // @grant        none
 // @license      MIT
 // ==/UserScript==
 
 // 插入 link 函数
-const injectStylesheet = url => {
+const injectStylesheet = (url) => {
   $('head').append(
     '<link rel="stylesheet" href="' + url + '" type="text/css" />',
   )
@@ -25,7 +24,7 @@ const injectStylesheet = url => {
 
   // 插入 toast.css
   injectStylesheet(
-    'https://cdn.rawgit.com/kamranahmedse/jquery-toast-plugin/bd761d335919369ed5a27d1899e306df81de44b8/dist/jquery.toast.min.css',
+    'https://cdn.bootcdn.net/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css',
   )
 
   // toast 函数
@@ -85,15 +84,37 @@ const injectStylesheet = url => {
         : 1
     } else if (keyCode === 32) {
       // 按空格键 开始/暂停
+      const [play] = document.getElementsByClassName('xgplayer-icon')
+      if (play) {
+        // 兼容处理
+        videoElement.click()
+        videoElement.click()
+        return
+      }
       videoElement.paused ? videoElement.play() : videoElement.pause()
     } else if (keyCode === 27 || keyCode === 13) {
+      // h5 全屏元素有两种，故使用 h51 和 h52 区分
       // 按 esc 进入全屏/退出全屏
-      const [slider_right] = document.getElementsByClassName('fullBtn')
-      // 刚开始还没有 fullBtn 按钮，让视频播放起来才会出现
-      if (!slider_right) {
+
+      if (videoElement.paused) {
         return firstChangeScreen()
       }
-      slider_right?.click()
+
+      // h51
+      const [slider_right] = document.getElementsByClassName('fullBtn')
+
+      // h52
+      const [fullscreen] = document.getElementsByClassName(
+        'xgplayer-fullscreen',
+      )
+
+      if (slider_right) {
+        // h51 click
+        slider_right?.click()
+      } else if (fullscreen) {
+        // h52 click
+        fullscreen?.click()
+      }
     } else if (keyCode === 67) {
       // c 提升速度
       videoElement.playbackRate += RATE
@@ -113,15 +134,30 @@ const injectStylesheet = url => {
       if (videoElement.paused) {
         const [playerImg] = document.getElementsByClassName('playerImg')
 
-        playerImg.click() // 播放
-        //   videoElement.pause() // 暂停
+        // h51
+        if (playerImg) {
+          playerImg.click() // 播放
+          //   videoElement.pause() // 暂停
+          setTimeout(() => {
+            const [slider_right] = document.getElementsByClassName('fullBtn')
+            // 进入全屏
+            slider_right?.click()
+          }, 100)
+          return
+        }
 
-        setTimeout(() => {
-          const [slider_right] = document.getElementsByClassName('fullBtn')
-          // 进入全屏
-          slider_right?.click()
-        }, 200)
-        return
+        // h52
+        const [start] = document.getElementsByClassName('xgplayer-start')
+        if (start) {
+          start.click()
+          setTimeout(() => {
+            const [fullscreen] = document.getElementsByClassName(
+              'xgplayer-fullscreen',
+            )
+            // 进入全屏
+            fullscreen?.click()
+          }, 200)
+        }
       }
     }
   }
